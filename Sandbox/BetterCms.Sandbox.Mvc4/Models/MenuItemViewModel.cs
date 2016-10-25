@@ -25,6 +25,9 @@
 // Email: info@bettercms.com
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
+using System.Collections.Generic;
+
 namespace BetterCms.Sandbox.Mvc4.Models
 {
     public class MenuItemViewModel
@@ -35,9 +38,6 @@ namespace BetterCms.Sandbox.Mvc4.Models
 
         public bool IsPublished { get; set; }
 
-        public override string ToString()
-        {
-            return string.Format("Caption: {0}, Url: {1}", Caption, Url);
-        }
+        public IEnumerable<MenuItemViewModel> Children { get; set; }
     }
 }

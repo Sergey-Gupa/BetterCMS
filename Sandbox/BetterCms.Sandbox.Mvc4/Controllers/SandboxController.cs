@@ -158,7 +158,7 @@ namespace BetterCms.Sandbox.Mvc4.Controllers
                     var response1 = api.Pages.SitemapNew.Tree.Get(request1);
                     if (response.Data.Count > 0)
                     {
-                        model.MenuItems = response1.Data.Select(mi => new MenuItemViewModel { Caption = mi.Title, Url = mi.Url, IsPublished = mi.PageIsPublished }).ToList();
+                        model.MenuItems = response1.Data.Select(Convert).ToList();
                     }
                 }
 
@@ -169,6 +169,17 @@ namespace BetterCms.Sandbox.Mvc4.Controllers
             }
 
             return View("~/Views/SitemapMenu/Index.cshtml", model);
+        }
+
+        private static MenuItemViewModel Convert(SitemapTreeNodeModel node)
+        {
+            return new MenuItemViewModel
+                {
+                    Caption = node.Title,
+                    Url = node.Url,
+                    IsPublished = node.PageIsPublished,
+                    Children = node.ChildrenNodes.Select(Convert).ToList()
+                };
         }
 
         private Guid? GetLanguageId(IApiFacade api, string languageCode)
