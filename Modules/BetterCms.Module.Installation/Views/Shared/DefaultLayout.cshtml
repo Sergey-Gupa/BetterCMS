@@ -53,7 +53,9 @@
 
     <div class="page-menu">
         <div class="page-frame clearfix">
-            @RenderSection("CMSMenu", false)
+            @{
+                Html.RenderAction("SitemapMenu", "Sandbox", new { area = string.Empty, languageCode = "default" });
+            }
         </div>
     </div>
 
